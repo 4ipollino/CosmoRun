@@ -123,6 +123,13 @@ public class Buttons : MonoBehaviour
             case "Achievements":
                 PlayGamesPlatform.Instance.ShowAchievementsUI();
                 break;
+            case "Tutor":
+                if (PlayerPrefs.GetString("Tutorial", "yes") != "no")
+                    PlayerPrefs.SetString("Tutorial", "no");
+                else
+                    PlayerPrefs.SetString("Tutorial", "yes");
+                this.gameObject.GetComponentInChildren<Text>().text = (PlayerPrefs.GetString("Tutorial") != "no") ? "ON" : "OFF";
+                break;
         }
 
 		if (normal != null)

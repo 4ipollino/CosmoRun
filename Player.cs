@@ -16,7 +16,7 @@ public class Player : ObjectMovingAround
 	void Update ()
 	{
 
-		if (!gameProcessObj.GetComponent<GameProcess> ().IsPaused ())
+		if (!gameProcessObj.GetComponent<GameProcess> ().bPause)
 		{
 			if (Input.GetTouch (0).phase == TouchPhase.Began)
 			{

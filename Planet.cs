@@ -126,7 +126,7 @@ public class Planet : MonoBehaviour
 */
 	void FixedUpdate ()
 	{
-		if (!gp.IsPaused ())
+		if (!gp.bPause)
 		{
 			this.transform.position = Vector3.Lerp (this.transform.position, coords, Time.fixedDeltaTime * smoothTime);
 		}

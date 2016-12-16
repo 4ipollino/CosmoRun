@@ -265,10 +265,10 @@ public class GameProcess : MonoBehaviour
 
 	public void ShowTutorial ()
 	{
-		string firstPlay = PlayerPrefs.GetString ("Tutorial");
+		string firstPlay = PlayerPrefs.GetString ("Tutorial", "yes");
 		if (firstPlay != "no")
 		{
-			bPause = true;
+            Pause();
 			tutorial.SetActive (true);			
 		}			
 	}
@@ -309,15 +309,22 @@ public class GameProcess : MonoBehaviour
 		score = 0;
 	}
 
-	public bool IsPaused ()
+	public void Pause ()
 	{
-		return bPause;		
-	}
+		bPause = true;
+        anim.SetFloat("Speed", 0);
+    }
 
-	/* 
+    public void UnPause()
+    {
+        bPause = false;
+        anim.SetFloat("Speed", 1);
+    }
+
+    /* 
 	 * функция для очереди планет, Queue не пашет(
 	 */
-	void MoveQueue ()
+    void MoveQueue ()
 	{
 		//GameObject[] clone = planets.Clone;
 		for (int i = 0; i < numberOfPlanets - 1; i++)

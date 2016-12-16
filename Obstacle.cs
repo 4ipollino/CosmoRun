@@ -10,7 +10,7 @@ public class Obstacle : ObjectMovingAround
     protected override void FixedUpdate ()
 	{
 
-		if ((moving)&&(gameProcessObj != null) &&(!gameProcessObj.GetComponent<GameProcess>().IsPaused()))
+		if ((moving)&&(gameProcessObj != null) &&(!gameProcessObj.GetComponent<GameProcess>().bPause))
            
             if (counter >= secondsPerMove + secondsMoreThanPlayer)
             {

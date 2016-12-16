@@ -34,7 +34,7 @@ public class ObjectMovingAround : MonoBehaviour {
 		if (gameProcessObj != null) 
 		{					
             //проверяем запущена ли игра
-			if (!gameProcessObj.GetComponent<GameProcess> ().IsPaused ())
+			if (!gameProcessObj.GetComponent<GameProcess> ().bPause)
 			{
                 /*** счетчик времени для анимации движения по окружности ***/
 

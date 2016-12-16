@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: ac92906fdeb404ade8fa82d24840af1b
-timeCreated: 1478036890
+timeCreated: 1481905862
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - timerText: {instanceID: 0}
+  - gp: {instanceID: 0}
+  - pressed: {fileID: 21300008, guid: 0975d4dcad815436c8ca2be3bfb41c97, type: 3}
+  - normal: {fileID: 21300008, guid: a5acf2efc5fe64bcabb0035490c77a31, type: 3}
+  - chooser: {instanceID: 0}
+  - tutorial: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -12,8 +12,8 @@ public class Tutorial : MonoBehaviour
         this.gameObject.SetActive (false);
         if(controlCanvas.activeInHierarchy)
         {
-            PlayerPrefs.SetString ("Tutorial", "no");
-		    process.GetComponent<GameProcess> ().bPause = false;
+            //PlayerPrefs.SetString ("Tutorial", "no");
+            process.GetComponent<GameProcess>().UnPause(); ;
         }
         else
         {

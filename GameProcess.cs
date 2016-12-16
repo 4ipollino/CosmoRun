@@ -48,6 +48,7 @@ public class GameProcess : MonoBehaviour
     // Use this for initialization
     void Start ()
 	{
+        /*
 		controlCanvas = GameObject.Find ("ControlCanvas");
         if (controlCanvas != null)
 		    controlCanvas.SetActive (false);
@@ -68,6 +69,7 @@ public class GameProcess : MonoBehaviour
 		tutorial = GameObject.Find ("Tutorial");
         if(tutorial != null)
 		    tutorial.SetActive (false);
+        */
 
         if(PlayerPrefs.GetString("FirstLaunch") != "firstLaunchSuccess")
         {
@@ -77,16 +79,42 @@ public class GameProcess : MonoBehaviour
             PlayerPrefs.SetString("UnlockedSkins", "1");          
         }        
 
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-                .Build();
+        if(!Shop)
+        {
+            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+                            .Build();
 
-        PlayGamesPlatform.InitializeInstance(config);
-        // Activate the Google Play Games platform
-        PlayGamesPlatform.Activate();
+            PlayGamesPlatform.InitializeInstance(config);
+            // Activate the Google Play Games platform
+            PlayGamesPlatform.Activate();
 
-        Social.localUser.Authenticate((bool success) => {
-
-        });
+            Social.localUser.Authenticate((bool success) => {
+                controlCanvas = GameObject.Find("ControlCanvas");
+                if (controlCanvas != null)
+                    controlCanvas.SetActive(false);
+                gameOverCanvas = GameObject.Find("GameOverCanvas");
+                if (gameOverCanvas != null)
+                    gameOverCanvas.SetActive(false);
+                settingsCanvas = GameObject.Find("SettingsMenu");
+                if (settingsCanvas != null)
+                    settingsCanvas.SetActive(false);
+                mainMenuCanvas = GameObject.Find("MainMenu");
+                if (mainMenuCanvas != null)
+                    mainMenuCanvas.SetActive(true);
+                planetAsset = Resources.Load<GameObject>("Planet");
+                //playerAsset = Resources.Load<GameObject> ("PlayerCharacter");
+                planets = new GameObject[numberOfPlanets];
+                record = PlayerPrefs.GetInt("Record");
+                musicSource = Camera.main.GetComponent<AudioSource>();
+                tutorial = GameObject.Find("Tutorial");
+                if (tutorial != null)
+                    tutorial.SetActive(false);
+                GameObject authBack = GameObject.Find("BackgroundAuth");
+                if (authBack != null)
+                    authBack.SetActive(false);
+            });
+        }
+        
 
         /*backgroundTiles = new GameObject[5];
 		Vector3 position = new Vector3 (0, 0, 10);

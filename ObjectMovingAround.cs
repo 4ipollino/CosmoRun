@@ -5,8 +5,8 @@ public class ObjectMovingAround : MonoBehaviour {
 
 	[SerializeField] protected const float zPos = 10;
 	[SerializeField] protected int step = 2;
-    [SerializeField] protected float timeDecreaseStep = .01f;
-    [SerializeField] protected float accelStep = .01f;
+    //[SerializeField] protected float timeDecreaseStep = .01f;
+    //[SerializeField] protected float accelStep = .01f;
     protected GameObject gameProcessObj;
 	protected GameObject target;
 
@@ -14,10 +14,10 @@ public class ObjectMovingAround : MonoBehaviour {
 	protected float yPos = 99;
 	protected int angle = 0;
 	protected float counter = 0;
-    protected float counter2 = 0;
+    //protected float counter2 = 0;
     
-    static public float secondsPerMove = .3f;
-    public float targetSecondsPerMove = .02f;
+    public float secondsPerMove = .3f;
+    //public float targetSecondsPerMove = .02f;
 	public float movingSmooth = 200;
 	public int direction = 1;
 

@@ -4,11 +4,11 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : ObjectMovingAround
 {
-    [SerializeField] float startupDeltaTime;
+    //[SerializeField] float startupDeltaTime;
 
 	override protected void Start ()
 	{
-        secondsPerMove = startupDeltaTime;
+        //secondsPerMove = startupDeltaTime;
         base.Start ();
 	}
 
@@ -29,7 +29,7 @@ public class Player : ObjectMovingAround
     {
         base.FixedUpdate();
 
-        if (counter2 >= accelStep)
+        /*if (counter2 >= accelStep)
         {
             if (secondsPerMove > targetSecondsPerMove)
                 secondsPerMove -= timeDecreaseStep;
@@ -37,7 +37,7 @@ public class Player : ObjectMovingAround
             counter2 = 0;
         }
 
-        counter2 += Time.fixedDeltaTime;
+        counter2 += Time.fixedDeltaTime;*/
     }
 
     /*public void SetAngle(int angle){

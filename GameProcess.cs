@@ -14,6 +14,7 @@ public class GameProcess : MonoBehaviour
 	[SerializeField] Vector3 offset;
 	[SerializeField] int prevPlanets = 2;
     [SerializeField] GameObject[] skins;
+    [SerializeField] GameObject achieveBtn, scoreBtn;
     [SerializeField]
     AudioClip death, pickup, teleport, buttonPress, unlock;
     [SerializeField]
@@ -26,7 +27,7 @@ public class GameProcess : MonoBehaviour
 
 	private Animator anim;
 	public bool bPause = true;
-	private GameObject controlCanvas, gameOverCanvas, mainMenuCanvas, settingsCanvas, scoreObj, moneyObj;
+    private GameObject controlCanvas, gameOverCanvas, mainMenuCanvas, settingsCanvas, scoreObj, moneyObj;
 	private GameObject goRecord, goScore;
 	private GameObject playerObj, planetAsset, tutorial;
 	//private Player playerScript;
@@ -76,45 +77,50 @@ public class GameProcess : MonoBehaviour
             PlayerPrefs.SetInt("SkinNumber", 1);
             PlayerPrefs.SetInt("Money", 0);
             PlayerPrefs.SetString("FirstLaunch", "firstLaunchSuccess");
-            PlayerPrefs.SetString("UnlockedSkins", "1");          
+            PlayerPrefs.SetString("UnlockedSkins", "1");                   
         }        
 
         if(!Shop)
-        {
-            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-                            .Build();
+        {        
 
-            PlayGamesPlatform.InitializeInstance(config);
-            // Activate the Google Play Games platform
-            PlayGamesPlatform.Activate();
+                PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+                                .Build();
 
-            Social.localUser.Authenticate((bool success) => {
-                controlCanvas = GameObject.Find("ControlCanvas");
-                if (controlCanvas != null)
-                    controlCanvas.SetActive(false);
-                gameOverCanvas = GameObject.Find("GameOverCanvas");
-                if (gameOverCanvas != null)
-                    gameOverCanvas.SetActive(false);
-                settingsCanvas = GameObject.Find("SettingsMenu");
-                if (settingsCanvas != null)
-                    settingsCanvas.SetActive(false);
-                mainMenuCanvas = GameObject.Find("MainMenu");
-                if (mainMenuCanvas != null)
-                    mainMenuCanvas.SetActive(true);
-                planetAsset = Resources.Load<GameObject>("Planet");
-                //playerAsset = Resources.Load<GameObject> ("PlayerCharacter");
-                planets = new GameObject[numberOfPlanets];
-                record = PlayerPrefs.GetInt("Record");
-                musicSource = Camera.main.GetComponent<AudioSource>();
-                tutorial = GameObject.Find("Tutorial");
-                if (tutorial != null)
-                    tutorial.SetActive(false);
-                GameObject authBack = GameObject.Find("BackgroundAuth");
-                if (authBack != null)
-                    authBack.SetActive(false);
-            });
-        }
-        
+                PlayGamesPlatform.InitializeInstance(config);
+                // Activate the Google Play Games platform
+                PlayGamesPlatform.Activate();
+
+                Social.localUser.Authenticate((bool success) => {                    
+
+                    controlCanvas = GameObject.Find("ControlCanvas");
+                    if (controlCanvas != null)
+                        controlCanvas.SetActive(false);
+                    gameOverCanvas = GameObject.Find("GameOverCanvas");
+                    if (gameOverCanvas != null)
+                        gameOverCanvas.SetActive(false);
+                    settingsCanvas = GameObject.Find("SettingsMenu");
+                    if (settingsCanvas != null)
+                        settingsCanvas.SetActive(false);
+                    mainMenuCanvas = GameObject.Find("MainMenu");
+                    if (mainMenuCanvas != null)
+                        mainMenuCanvas.SetActive(true);
+                    planetAsset = Resources.Load<GameObject>("Planet");
+                    //playerAsset = Resources.Load<GameObject> ("PlayerCharacter");
+                    planets = new GameObject[numberOfPlanets];
+                    record = PlayerPrefs.GetInt("Record");
+                    musicSource = Camera.main.GetComponent<AudioSource>();
+                    tutorial = GameObject.Find("Tutorial");
+                    if (tutorial != null)
+                        tutorial.SetActive(false);
+
+                    achieveBtn.SetActive(success);
+                    scoreBtn.SetActive(success);
+
+                    GameObject authBack = GameObject.Find("BackgroundAuth");
+                    if (authBack != null)
+                        authBack.SetActive(false);
+                });         
+        }     
 
         /*backgroundTiles = new GameObject[5];
 		Vector3 position = new Vector3 (0, 0, 10);

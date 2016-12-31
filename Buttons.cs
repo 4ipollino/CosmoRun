@@ -89,16 +89,32 @@ public class Buttons : MonoBehaviour
                 chooser.ChooseSkin();
                 break;
             case "BackScene":
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
                 break;
             case "Skins":
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(2);
                 break;
             case "HowTo":
                 tutorial.SetActive(true);
                 foreach(GameObject canvas in canvases)
                 {
                     canvas.SetActive(false);
+                }
+                break;
+            case "price_4":
+                if (PlayerPrefs.GetInt("Money") >= 40)
+                {
+                    PlayerPrefs.SetString("UnlockedSkins", PlayerPrefs.GetString("UnlockedSkins") + " 5");
+                    PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - 40);
+                    Social.ReportProgress("CgkIt8SX4LQYEAIQDg", 100, (bool success) => { });
+                }
+                break;
+            case "price_3":
+                if (PlayerPrefs.GetInt("Money") >= 50)
+                {
+                    PlayerPrefs.SetString("UnlockedSkins", PlayerPrefs.GetString("UnlockedSkins") + " 4");
+                    PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") - 50);
+                    Social.ReportProgress("CgkIt8SX4LQYEAIQDg", 100, (bool success) => { });
                 }
                 break;
             case "price_2":

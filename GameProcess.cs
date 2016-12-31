@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using System.Collections;
 using GooglePlayGames;
-using GooglePlayGames.BasicApi;
 using GoogleMobileAds.Api;
 using System;
 
@@ -72,25 +71,20 @@ public class GameProcess : MonoBehaviour
 		    tutorial.SetActive (false);
         */
 
-        if(PlayerPrefs.GetString("FirstLaunch") != "firstLaunchSuccess")
+        /*if(PlayerPrefs.GetString("FirstLaunch") != "firstLaunchSuccess")
         {
             PlayerPrefs.SetInt("SkinNumber", 1);
             PlayerPrefs.SetInt("Money", 0);
             PlayerPrefs.SetString("FirstLaunch", "firstLaunchSuccess");
             PlayerPrefs.SetString("UnlockedSkins", "1");                   
-        }        
+        }*/        
 
         if(!Shop)
         {        
-
-                PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
-                                .Build();
-
-                PlayGamesPlatform.InitializeInstance(config);
                 // Activate the Google Play Games platform
-                PlayGamesPlatform.Activate();
+                //PlayGamesPlatform.Activate();
 
-                Social.localUser.Authenticate((bool success) => {                    
+                /*Social.localUser.Authenticate((bool success) => { */                   
 
                     controlCanvas = GameObject.Find("ControlCanvas");
                     if (controlCanvas != null)
@@ -113,13 +107,13 @@ public class GameProcess : MonoBehaviour
                     if (tutorial != null)
                         tutorial.SetActive(false);
 
-                    achieveBtn.SetActive(success);
-                    scoreBtn.SetActive(success);
+                    achieveBtn.SetActive(bool.Parse(PlayerPrefs.GetString("Auth", "false")));
+                    scoreBtn.SetActive(bool.Parse(PlayerPrefs.GetString("Auth", "false")));
 
-                    GameObject authBack = GameObject.Find("BackgroundAuth");
+                   /* GameObject authBack = GameObject.Find("BackgroundAuth");
                     if (authBack != null)
-                        authBack.SetActive(false);
-                });         
+                        authBack.SetActive(false);*/
+                /*}); */        
         }     
 
         /*backgroundTiles = new GameObject[5];
@@ -172,7 +166,7 @@ public class GameProcess : MonoBehaviour
 				planets [numberOfPlanets - 1].transform.position = new Vector3 (-2, 0, 10);
 				planets [numberOfPlanets - 1].GetComponent<Planet> ().coords = planets [numberOfPlanets - 1].transform.position;
 				planets [numberOfPlanets - 1].GetComponent<Planet> ().CreatePlanetObjects (true);
-				playerObj = Instantiate (skins[PlayerPrefs.GetInt("SkinNumber")-1]) as GameObject;
+				playerObj = Instantiate (skins[PlayerPrefs.GetInt("SkinNumber", 1)-1]) as GameObject;
 				playerObj.transform.position = planets [numberOfPlanets - 1].transform.position;
 				playerObj.GetComponent<Player> ().SetTarget (planets [numberOfPlanets - 1]);
 				anim = playerObj.GetComponentInChildren<Animator> ();
@@ -256,7 +250,7 @@ public class GameProcess : MonoBehaviour
 		}
 		goScore.GetComponent<Text> ().text = "SCORE: " + score;
 		goRecord.GetComponent<Text> ().text = "HIGHSCORE: " + record;
-        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") + money);
+        PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money", 0) + money);
         Social.ReportProgress("CgkIt8SX4LQYEAIQAQ", 100, (bool success) => { });
         PlayGamesPlatform.Instance.IncrementAchievement("CgkIt8SX4LQYEAIQEg", 1, (bool success) => { });
         PlayGamesPlatform.Instance.IncrementAchievement("CgkIt8SX4LQYEAIQEw", 1, (bool success) => { });

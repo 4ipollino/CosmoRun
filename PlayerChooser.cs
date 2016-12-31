@@ -25,12 +25,12 @@ public class PlayerChooser : MonoBehaviour {
         buttonPrev.SetActive(false);
         buttonPrev.GetComponent<Buttons>().normal = inactive;
         buttonPrev.GetComponent<Image>().sprite = inactive;
-        moneyObj.GetComponent<Text>().text = PlayerPrefs.GetInt("Money").ToString();
+        moneyObj.GetComponent<Text>().text = PlayerPrefs.GetInt("Money", 0).ToString();
     }
 
     private void Update()
     {
-        string[] unlocked = PlayerPrefs.GetString("UnlockedSkins").Split(' ');
+        string[] unlocked = PlayerPrefs.GetString("UnlockedSkins", "1").Split(' ');
         bool isUnlocked = false;
         foreach (string number in unlocked)
         {
@@ -44,7 +44,7 @@ public class PlayerChooser : MonoBehaviour {
                     button.SetActive(false);
                 }
 
-                if (index == PlayerPrefs.GetInt("SkinNumber"))
+                if (index == PlayerPrefs.GetInt("SkinNumber", 1))
                 {
                     buttonChoose.GetComponent<Image>().enabled = false;
                     buttonChoose.SetActive(false);
@@ -80,7 +80,7 @@ public class PlayerChooser : MonoBehaviour {
 
         this.transform.localPosition = Vector3.Lerp(this.transform.localPosition, new Vector3(posX, this.transform.localPosition.y, this.transform.localPosition.z), Time.deltaTime * smooth);
         GameObject moneyText = GameObject.Find("money");
-        moneyText.GetComponent<Text>().text = PlayerPrefs.GetInt("Money").ToString();
+        moneyText.GetComponent<Text>().text = PlayerPrefs.GetInt("Money", 0).ToString();
     }
 
 	public void PreviousSkin()
@@ -107,7 +107,7 @@ public class PlayerChooser : MonoBehaviour {
 
     public void NextSkin()
     {
-        if(index < 3)
+        if(index < priceButtons.Length + 1)
         {
             buttonPrev.SetActive(true);
             buttonPrev.GetComponent<Buttons>().normal = active;
@@ -117,7 +117,7 @@ public class PlayerChooser : MonoBehaviour {
             index++;
             Debug.Log("index " + index);
 
-            if (index > 2)
+            if (index > priceButtons.Length)
             {
                 buttonNext.GetComponent<Buttons>().normal = inactive;
                 buttonNext.GetComponent<Image>().sprite = inactive;
